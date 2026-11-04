@@ -1,94 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:tp_flutter/app/screens/about/about_screen.dart';
-import 'package:tp_flutter/app/screens/profile/profile_screen.dart';
 
+import '../../widgets/profile_card.dart';
+import '../about/about_screen.dart';
+import '../profile/profile_screen.dart';
 
-class HomeScreen extends StatefulWidget{
-const HomeScreen({super.key});
-@override
-State<HomeScreen> createState()=> _HomeScreenState();
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>{
-  List <dynamic> profiles=[
-    {
-      "name": "Jean Malonga",
-      "image": "assets/profiles/profile_1.jpg"
-    },
-    {
-      "name": "Jacques Bouadi",
-      "image": "assets/profiles/profile_2.jpg"
-    },
-    {
-      "name": "Farrol MBouala",
-      "image": "assets/profiles/profile_3.jpg"
-    },
-    {
-      "name": "Emmanuelle Sah",
-      "image": "assets/profiles/profile_f_1.jpg"
-    },
-    {
-      "name": "Jacline Matondo",
-      "image": "assets/profiles/profile_f_2.jpg"
-    },
-    {
-      "name": "Nadine Nade",
-      "image": "assets/profiles/profile_f_3.jpg"
-    },
+class _HomeScreenState extends State<HomeScreen> {
+  List<dynamic> profiles = [
+    {"name": "Jean MALONGA", "image": "assets/images/profiles/profile_1.jpg"},
+    {"name": "Jean PATRICK", "image": "assets/images/profiles/profile_2.jpg"},
+    {"name": "Sarah NGOMA", "image": "assets/images/profiles/profile_f_1.jpg"},
+    {"name": "Sarah NGOMA", "image": "assets/images/profiles/profile_f_1.jpg"},
   ];
 
   @override
- Widget build(BuildContext context){
-  return Scaffold(
-    appBar: AppBar(
-      
-      title: Text('Home Screen', style: TextStyle(color: Colors.white),), centerTitle: true,
-      backgroundColor: Colors.purple,
-      actions: [
-        IconButton(
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context)=> AboutScreen(), 
-              )
-            );
-          }, 
-          icon: Icon(
-            Icons.info,
-            color: Colors.white,
-          )
-        )
-      ],
-    ),
-    body: ListView.builder(
-      itemCount: profiles.length,
-      itemBuilder: (context, index){
-        final profile=profiles[index];
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context, MaterialPageRoute(
-                builder: (context)=> ProfileScreen(
-                  name: profile['name'],
-                  image: profile['image'],
-                )
-              )
-            );
-          },
-          child: ListTile(
-            title: Text(profile["name"]),
-            subtitle: Text('${profile["name"][0].toUpperCase()}'+'${profile["name"][1].toUpperCase()}'),
-            leading: CircleAvatar(
-              backgroundColor: Colors.purple,
-              backgroundImage: AssetImage(profile["image"]),
-              
-            ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home Screen", style: TextStyle(color: Colors.white)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutScreen()),
+              );
+            },
+            icon: Icon(Icons.info),
           ),
-        );
-      }
-    ),
-  );
- }
+        ],
+        backgroundColor: Colors.purple,
+      ),
+      body: ListView.builder(
+        itemCount: profiles.length, // Nombre d'éléments dans la liste
+        itemBuilder: (context, index) {
+          final profile = profiles[index]; // Récupérer le profil actuel
+          // {"name: "Jean MALONGA", "image": "assets/images/profiles/profile_1.jpg"}
+          return GestureDetector(
+            onTap: () {
+              // Naviguer vers l'écran de profil avec les détails du profil
+              Navigator.push(
+                context,
+
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(
+                    name: profile["name"],
+                    image: profile["image"],
+                  ),
+                ),
+              );
+            },
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage(profile["image"]),
+              ),
+              title: Text(profile["name"]),
+              subtitle: Text(profile["name"][0].toUpperCase()),
+            ),
+          );
+        },
+      ),
+    );
+  }
 }

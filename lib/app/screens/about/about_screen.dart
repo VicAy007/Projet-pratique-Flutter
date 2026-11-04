@@ -1,105 +1,52 @@
 import 'package:flutter/material.dart';
 
 class AboutScreen extends StatefulWidget {
-  const AboutScreen({super.key});
+  const new({super.key});
 
   @override
   State<AboutScreen> createState() => _AboutScreenState();
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-
-  int count=10;
+  int counter = 10;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            Text(
-              'About Screen',
-                style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black
-              ),
-            ),
-            SizedBox(height: 24,),
-            Text(
-              'Description',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 24,),
-            Text(
-              'Counter $count'
-            ),
-            SizedBox(height: 24,),
-            ElevatedButton(
-              onPressed: (){
-                setState(() {
-                  count++;
-                });
-              }, 
-              child: Text(
-                'Incrémenter'
-              )
-            ), 
-            SizedBox(height: 24,),
-              ElevatedButton(
-              onPressed: (){
-                setState(() {
-                  count--;
-                });
-              }, 
-              child: Text(
-                'Décrémenter'
-              )
-            ),
-            SizedBox(height: 24,),
-              ElevatedButton(
-                onPressed: (){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      action: SnackBarAction(label: 'Cancel', onPressed: (){}),
-                      backgroundColor: Colors.purple,
-                      content: Text(
-                        'Hello from About Screen',
-                      ),
-                      duration: Duration(seconds: 5),
-                    ),
-                  );
-                },
-                child: Text(
-                  'Message',
-                  selectionColor: Colors.purple,
-                  style: TextStyle(
-                    color: Colors.black
-                  ),
+      body: Column(
+        children: [
+          Text(
+            "About Screen",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          Text("Description page", style: TextStyle(fontSize: 20)),
+          SizedBox(height: 20),
+          Text("Coumpteur ${counter}", style: TextStyle(fontSize: 20)),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              counter++;
+              setState(() {
+                // Mettre à jour l'état pour refléter le changement du compteur
+              });
+            },
+            child: Text("Incrementer"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text("Hello from About Screen!"),
+                  duration: Duration(days: 20),
+                  action: SnackBarAction(label: "Cancel", onPressed: () {}),
                 ),
-              ),
-          ],
-        ),
+              );
+            },
+            child: Text("Message"),
+          ),
+        ],
       ),
     );
   }
 }
-
-
-
-/* onPressed: (){
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    
-                  ),
-                ),
-              );
-            }, 
-            child: Text(
-              'Message',
-            ) */
